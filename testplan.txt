@@ -1,0 +1,35 @@
+Test Plan for Robot dieing web app
+
+Overview:
+
+Test the main functionality of the app
+
+Links:
+
+LocalHost:3000
+
+Test Criteria:
+
+    - Ensure a robot battle can happen
+
+    - Page shows dueling instructions on load
+
+    - Shows wins and losses after one battle with accurate count
+
+    - Ability to see all the bots by clicking on the "see all bots" button
+
+    - Can create a due (team of robots battling for you)
+
+    - Page has our company's blue, futuristic styling
+
+    - We can see 5 robots to draw when preparing for battle
+
+Entry criteria:
+
+    - Project is downloaded on local machine
+
+    - Nodemon running backend on port 3000
+
+    - Local machine is a desktop, not a phone or tablet
+
+Exit Criteria: 

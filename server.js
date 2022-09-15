@@ -4,24 +4,34 @@ const app = express()
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
 
-app.use(express.static(__dirname + 'public'))
-
 app.use(express.json())
 
-//rollbar
 
 var Rollbar = require('rollbar')
 var rollbar = new Rollbar({
-  accessToken: ROLLBARTOKEN,
+  accessToken: '724a1e5949094274ba331f9754decacf',
   captureUncaught: true,
   captureUnhandledRejections: true,
 })
 
-//rollbar message
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
 
-rollbar.log('Hello!')
-rollbar.error('An error has occured!')
-rollbar.warning('Caution')
+app.get('/', () => (req, res) => {
+    rollbar.log('user visiting site')
+    res.sendFile(path.join(__dirname, 'public/index.html'))
+})
+
+app.get('/styles', () => (req, res) => {
+    rollbar.info('styles avail to user')
+    res.sendFile(path.join(__dirname, 'public/index.css'))
+})
+
+
+app.get('/js', () => (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.js'))
+})
+
 
 
 
@@ -29,6 +39,7 @@ app.get('/api/robots', (req, res) => {
     try {
         res.status(200).send(botsArr)
     } catch (error) {
+        rollbar.error('/api/robots not able to send botsArr to front end')
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
@@ -41,6 +52,7 @@ app.get('/api/robots/five', (req, res) => {
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
     } catch (error) {
+        rollbar.critical('/api/robots/five not working: unable to duel')
         console.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
     }

@@ -1,0 +1,16 @@
+Test Case 001
+
+Description
+
+    Tis test will verify that 5 robots are populated 
+    on the page when the user clicks the "Draw" button
+
+Steps: 
+
+    1. Setup website by navigating to root folder of project and running "nodemon"
+    2. Go to localhost: 3000
+    3. Click the "Draw" button
+
+Test Postconditions: 
+
+    - Five robot cards should appear on the page
